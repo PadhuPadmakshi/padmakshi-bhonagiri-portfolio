@@ -6,9 +6,9 @@ Developer opportunity.
 
 **By:** Padmakshi Bhonagiri, Senior Full Stack .NET Developer (10+ years).
 
-**GitHub / Portfolio:** https://github.com/PadhuPadmakshi/iowa-doit-portfolio
+**GitHub / Portfolio:** https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio
 
-**Live UI (GitHub Pages, static demo):** https://padhupadmakshi.github.io/iowa-doit-portfolio/ — this opens the UI in a browser with no install. The full ASP.NET Core app cannot run on GitHub Pages (static hosting only), so the Pages site is a static demo of the same journey; run `dotnet run --project src/IowaPortal.Web` for the full server app.
+**Live UI (GitHub Pages, static demo):** https://padhupadmakshi.github.io/padmakshi-bhonagiri-portfolio/ — this opens the UI in a browser with no install. The full ASP.NET Core app cannot run on GitHub Pages (static hosting only), so the Pages site is a static demo of the same journey; run `dotnet run --project src/IowaPortal.Web` for the full server app.
 
 **What this is:** a complete, runnable ASP.NET Core demonstration
 application — a fictional public-services eligibility and benefits portal
@@ -105,7 +105,7 @@ never sent to clients.
 ## Project structure
 
 ```
-iowa-doit-portfolio/
+padmakshi-bhonagiri-portfolio/
 ├── IowaPortal.sln
 ├── azure-pipelines.yml            # Azure DevOps CI: restore, build, test, a11y smoke check, publish
 ├── README.md                      # this file
@@ -169,9 +169,9 @@ web server or database.
 | Accessibility (core, across all) | WCAG 2.1 AA target, axe + JAWS workflow, before/after remediation, keyboard/dialog/form-error checklist |
 | Azure DevOps / CI/CD | `azure-pipelines.yml`: restore, build, test, accessibility smoke check, publish artifact |
 | Enterprise design system | Token-based system in `wwwroot/scss/`; written distinction from a component library and from Bootstrap/Material; multi-team adoption plan |
-| Modernizing (not just greenfield) | Legacy WebForms sample + strangler-sequence doc; resume evidence: VB.NET → .NET Core 6 at Frontiers, ASP.NET → MVC at State of New Jersey |
-| Government / healthcare experience | Resume: State of New Jersey (government, 2019–2021); Centene (healthcare, 2023–present). This demo itself is not government work and does not claim to be. |
-| Angular (preferred, not required) | On resume (Angular 8/14/18); representative excerpt in `samples/angular/`. Deliberately not wired into the running app — see below. |
+| Modernizing (not just greenfield) | Legacy WebForms sample + strangler-sequence doc; resume evidence: .NET 6 → .NET 8 at Centene (Member Self-Service Portal Modernization, early 2024), .NET Core 3.1 → .NET 6 at Frontiers (Author and Reviewer Submission Platform), and Web Forms Section 508/WCAG remediation + mainframe batch interfaces at the State of New Jersey Department of Labor & Workforce Development (Unemployment Insurance Claimant Services Modernization) |
+| Government / healthcare experience | Resume: State of New Jersey Department of Labor & Workforce Development, Trenton (government, 2019–2021); Centene, St. Louis, Missouri (healthcare, 2023–present). This demo itself is not government work and does not claim to be. |
+| Angular (preferred, not required) | On resume (Angular and TypeScript at Frontiers); representative excerpt in `samples/angular/`. Deliberately not wired into the running app — see below. |
 | AWS (preferred, future) | Documented as a future-deployment note in `docs/security.md`. No AWS resources are created here. |
 | GitHub (preferred) | Repository-ready layout; publishing steps in `docs/deployment.md`. |
 
@@ -223,10 +223,12 @@ See `docs/sql-server.md` for the schema and the parameterized-query rule.
 
 ## Honest limits — read before submitting this portfolio
 
-1. **No WCAG certification or formal WCAG training is claimed.** The
-   resume does not document either, and this portfolio does not invent
-   them. It demonstrates WCAG 2.1 AA implementation and a documented
-   axe + JAWS workflow.
+1. **No WCAG certification is claimed.** The Iowa-tailored resume
+   documents formal WCAG training and routine keyboard and screen-reader
+   testing with JAWS and NVDA, plus axe remediation — but it names no
+   specific certification (for example, IAAP WAS/CPACC or DHS Trusted
+   Tester), and none is claimed here. This portfolio demonstrates WCAG
+   2.1 AA implementation and a documented axe + JAWS workflow.
 2. **No page is claimed to be "fully compliant."** Automated checks
    (axe, the CI smoke check) are reported as automated results only.
    A live JAWS pass and a live axe pass by a human tester are still
@@ -235,10 +237,12 @@ See `docs/sql-server.md` for the schema and the parameterized-query rule.
    Linux build environment used to create this project, which has no
    JAWS installation.
 3. **No previous work for the State of Iowa is claimed.** The author's
-   government experience is the State of New Jersey role on her resume.
+   government experience is the State of New Jersey Department of Labor
+   & Workforce Development role on her resume.
    This demo is an independent portfolio piece, not Iowa work product.
 4. **No degree in Human-Computer Interaction is claimed.** The author's
-   degree is a Bachelor of Technology in Information Technology (JNTU
+   degrees are a Master of Science from Saint Louis University, St. Louis,
+   Missouri, and a Bachelor of Technology in Information Technology (JNTU
    Hyderabad, 2011–2015), plus 10+ years of professional experience.
 5. **No government security authorization.** This demo has not been
    security-reviewed and must not be presented as an authorized system.
