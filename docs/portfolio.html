@@ -3,71 +3,246 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Padmakshi Bhonagiri — Senior .NET and Front-End UI/UX Developer</title>
-<link rel="stylesheet" href="site.css">
+<title>Padmakshi Bhonagiri — Senior Full Stack .NET Developer</title>
+<meta name="description" content="Portfolio of Padmakshi Bhonagiri, Senior Full Stack .NET Developer, 10+ years in healthcare, banking, government, and airlines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  body { background: #fff; }
-  .hero { background: #0b0b0f; color: #fff; padding: 4rem 0 3rem; position: relative; overflow: hidden; }
-  .hero h1 { font-size: clamp(2.5rem, 9vw, 6rem); line-height: 0.95; margin: 0; letter-spacing: -0.02em; }
-  .hero p.lead { color: #e8e8ec; max-width: 34rem; font-size: 1.15rem; }
-  .hero .accent-circle { position: absolute; right: 12%; top: 1.5rem; width: 9rem; height: 9rem; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff9a8b, #ff6a88 45%, #ff9a44 100%); opacity: 0.9; }
-  .hero .accent-dot { position: absolute; right: 28%; bottom: 2rem; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: #4da3ff; }
-  .hero .monogram { display: inline-block; border: 3px solid #fff; border-radius: 50%; width: 6rem; height: 6rem; line-height: 5.5rem; text-align: center; font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
-  .about { background: #f5efe4; padding: 3rem 0; }
-  .about h2 { font-size: clamp(2rem, 6vw, 3.5rem); margin: 0 0 1rem; letter-spacing: -0.01em; }
-  .tools { padding: 2rem 0; }
-  .tool-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tool-list li { border: 2px solid #0f3556; border-radius: 999px; padding: 0.4rem 1rem; font-weight: 700; }
-  .contact { background: #0f3556; color: #fff; padding: 3rem 0; }
-  .contact a { color: #fff; }
-  .contact h2 { font-size: clamp(2rem, 6vw, 3.5rem); margin-top: 0; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:#0f172a;background:#f0f9ff}
+  a{color:inherit}
+  .skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;padding:.5rem;z-index:200}
+  /* Floating pill nav, centred at the top */
+  .pillnav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:.25rem;align-items:center;background:rgba(15,23,42,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:.45rem .6rem}
+  .pillnav a{color:#fff;text-decoration:none;font-weight:800;letter-spacing:.08em;font-size:.8rem;padding:.5rem 1rem;border-radius:999px}
+  .pillnav a:hover{background:rgba(255,255,255,.2)}
+  .pillnav button{background:transparent;border:0;color:#fff;font-size:1rem;cursor:pointer;padding:.4rem .6rem;border-radius:999px}
+  /* Hero: full viewport, text left, large character right, cooler tones */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;overflow:hidden;background:linear-gradient(100deg,#0f4c81 0%,#0e7490 55%,#0891b2 100%);color:#fff;padding:5.5rem 4rem 0 4rem}
+  .hero-text{max-width:560px}
+  .hero-text .hi{font-size:.95rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin:0 0 .25rem}
+  .hero-text h1{font-family:Caveat,cursive;font-size:clamp(4.5rem,9vw,8.5rem);line-height:.9;margin:0;color:#fff}
+  .hero-text p{font-size:1.05rem;line-height:1.6;color:#e0f2fe;max-width:480px}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+  .btn{display:inline-block;text-decoration:none;font-weight:800;border-radius:999px;padding:.9rem 1.8rem;border:0;cursor:pointer;font-size:1rem}
+  .btn-white{background:#fff;color:#0f172a}
+  .btn-dark{background:#0f172a;color:#fff}
+  .btn-outline{background:transparent;color:#0f172a;border:2px solid #0f172a}
+  .hero-char{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:center}
+  .hero-char img{height:94vh;max-height:900px;width:auto;object-fit:contain;transition:transform .3s ease-out;will-change:transform}
+  .wink{position:absolute;top:22%;right:18%;font-size:2rem;opacity:0;transition:opacity .3s;pointer-events:none}
+  .wink.show{opacity:1}
+  section{padding:4.5rem 4rem;scroll-margin-top:90px}
+  section h2{font-size:2.4rem;margin:0 0 .5rem;color:#0f172a}
+  section .lead{font-size:1.05rem;color:#334155;max-width:720px;line-height:1.6}
+  #work{background:#f0f9ff}
+  #about{background:#ecfeff}
+  #contact{background:#eef2ff}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem;margin-top:2rem}
+  .card{background:#fff;border:1px solid #bae6fd;border-radius:20px;padding:1.5rem}
+  .card h3{margin:.5rem 0;color:#0f172a}
+  .card p{color:#334155;line-height:1.6}
+  .tags{list-style:none;padding:0;display:flex;gap:.5rem;flex-wrap:wrap}
+  .tags li{background:#e0f2fe;color:#0c4a6e;border-radius:999px;padding:.3rem .8rem;font-size:.85rem;font-weight:600}
+  .timeline{margin-top:2rem}
+  .timeline article{border-left:3px solid #0891b2;padding:0 0 1.25rem 1.25rem}
+  .timeline h3{margin:0}
+  .timeline p{margin:.25rem 0;color:#334155}
+  .skillpills{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}
+  .skillpills span{background:#fff;border:1px solid #7dd3fc;border-radius:999px;padding:.4rem .9rem;font-weight:600;color:#0c4a6e}
+  video{width:100%;border-radius:16px;background:#0f172a}
+  .contact-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;align-items:center}
+  footer{padding:2rem;text-align:center;color:#475569;background:#f0f9ff}
+  /* Modal */
+  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;place-items:center;z-index:300;padding:1rem}
+  .backdrop.open{display:grid}
+  .modal{background:#fff;color:#0f172a;border-radius:20px;max-width:560px;width:100%;padding:1.5rem;max-height:90vh;overflow:auto}
+  .modal h2{color:#0f172a}
+  /* Dark mode, still cooler tones */
+  body.dark{background:#0b1220;color:#f1f5f9}
+  body.dark section h2,body.dark .card h3,body.dark .timeline h3,body.dark .modal h2{color:#f1f5f9}
+  body.dark #work{background:#0f172a} body.dark #about{background:#111827} body.dark #contact{background:#1e1b4b}
+  body.dark .card{background:#1e293b;border-color:#334155} body.dark .card p,body.dark .timeline p,body.dark section .lead{color:#cbd5e1}
+  body.dark .hero{background:linear-gradient(100deg,#082f49 0%,#164e63 55%,#155e75 100%)}
+  body.dark .modal{background:#1e293b;color:#f1f5f9} body.dark footer{background:#0b1220;color:#94a3b8}
+  body.dark .skillpills span{background:#1e293b;border-color:#334155;color:#bae6fd}
+  body.dark .btn-outline{color:#f1f5f9;border-color:#f1f5f9}
+  @media (max-width:800px){
+    .hero{grid-template-columns:1fr;padding:5.5rem 1.25rem 0}
+    .hero-char img{height:62vh}
+    section{padding:3rem 1.25rem}
+    .pillnav a{padding:.5rem .6rem;font-size:.7rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto} .hero-char img{transition:none}
+  }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to main content</a>
-<main id="main">
-<section class="hero"><div class="container">
-<div class="accent-circle" aria-hidden="true"></div>
-<div class="accent-dot" aria-hidden="true"></div>
-<span class="monogram" aria-hidden="true">PB</span>
-<h1>HI, I'M<br>PADMAKSHI.</h1>
-<p class="lead">Senior .NET and Front-End UI/UX Developer, 10+ years. I build, modernize, and support enterprise applications across state government, healthcare, financial services, and publishing — translating designs into responsive, accessible, production-quality interfaces.</p>
-<p><a class="btn" href="uiux.html">See the UI/UX work</a> <a class="btn btn--secondary" href="index.html" style="background:#fff;color:#0f3556;">Try the live portal demo</a></p>
-</div></section>
+<a class="skip" href="#work">Skip to work</a>
+<nav class="pillnav" aria-label="Main">
+  <a href="#work">WORK</a>
+  <a href="#about">ABOUT</a>
+  <a href="#contact">CONTACT</a>
+  <button type="button" id="dark-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+</nav>
 
-<section class="about"><div class="container">
-<h2>ABOUT ME</h2>
-<p><strong>With over 10 years of experience</strong> building, modernizing, and supporting enterprise applications. Strong hands-on expertise in C#, .NET 8, ASP.NET MVC and Web Forms, HTML5, CSS3, Sass/SCSS, JavaScript, REST APIs, middleware, and SQL Server.</p>
-<p>I translate Figma designs into responsive interfaces and extend shared enterprise design systems with design tokens and reusable components, as distinct from frameworks such as Bootstrap and Angular Material. I code to WCAG 2.1 AA and Section 508, backed by formal WCAG training and routine keyboard and screen-reader testing with JAWS and NVDA, plus remediation with axe. I deliver through Azure DevOps CI/CD, support production applications, and protect sensitive data (PII/PHI) with secure coding and .NET encryption APIs in Agile teams.</p>
-<p><strong>Education:</strong> Master of Science, Saint Louis University, St. Louis, Missouri; Bachelor of Technology in Information Technology, JNTU Hyderabad.</p>
-</div></section>
+<header class="hero" id="hero">
+  <div class="hero-text">
+    <p class="hi">Hi, I'm</p>
+    <h1>Padmakshi</h1>
+    <p>Senior Full Stack .NET Developer with 10+ years building enterprise software in healthcare, banking, government, and airlines. Back-end .NET done properly, front ends people can actually use, and work supported after it ships.</p>
+    <p>Texas, US · GC EAD</p>
+    <div class="hero-btns">
+      <a class="btn btn-white" href="#work">View My Work</a>
+      <button class="btn btn-dark" type="button" id="lets-talk-btn">Let's Talk</button>
+    </div>
+  </div>
+  <div class="hero-char" id="hero-char">
+    <img id="cursor-avatar" src="img/avatar-3d.png" alt="Stylized 3D avatar of Padmakshi Bhonagiri in business casual dress: white blouse and charcoal grey blazer">
+    <span class="wink" id="wink-badge" aria-hidden="true">😉</span>
+  </div>
+</header>
 
-<section class="tools"><div class="container">
-<h2>TOOLS &amp; SKILLS</h2>
-<ul class="tool-list">
-<li>Figma</li><li>Storybook</li><li>HTML5</li><li>CSS3 / Sass</li><li>JavaScript / TypeScript</li><li>Angular</li><li>Bootstrap</li><li>Angular Material</li><li>C# / .NET 8</li><li>ASP.NET Core / MVC / Web Forms</li><li>REST APIs / Middleware</li><li>SQL Server</li><li>axe / axe-core</li><li>JAWS</li><li>NVDA</li><li>WAVE</li><li>Azure DevOps</li><li>GitHub Actions</li><li>Git / GitHub</li>
-</ul>
-<p>Design-system note: enterprise design systems, design-token implementation, component documentation, and component governance — not just a component library or a framework.</p>
-</div></section>
+<main>
+<section id="work" aria-labelledby="work-title">
+  <h2 id="work-title">Work</h2>
+  <p class="lead">Selected work from my own career, in the same language as the rest of this site: large type, rounded cards, and no clutter.</p>
+  <div class="cards">
+    <article class="card"><div aria-hidden="true" style="font-size:2rem">🏥</div><h3>Healthcare Enterprise Platform</h3><p>Microservices and full-stack .NET at Centene, with Azure delivery and tuned SQL Server access.</p><ul class="tags"><li>.NET 8</li><li>Angular</li><li>Azure</li></ul></article>
+    <article class="card"><div aria-hidden="true" style="font-size:2rem">🎨</div><h3>Front-End &amp; UI/UX Platform</h3><p>Responsive, token-based interfaces at Frontiers, plus the accessible multi-step form demo on this site.</p><ul class="tags"><li>React</li><li>Angular</li><li>SCSS</li></ul></article>
+    <article class="card"><div aria-hidden="true" style="font-size:2rem">🏛️</div><h3>Government Services System</h3><p>Secure, role-aware public-sector workflows for the State of New Jersey, with SQL Server reporting.</p><ul class="tags"><li>MVC</li><li>Web API</li><li>SQL Server</li></ul></article>
+    <article class="card"><div aria-hidden="true" style="font-size:2rem">💰</div><h3>Financial Services Applications</h3><p>Transactional .NET and Web API services at Fidelity, built for scale and auditability.</p><ul class="tags"><li>ASP.NET</li><li>C#</li><li>ADO.NET</li></ul></article>
+  </div>
+  <p style="margin-top:2rem"><a class="btn btn-outline" href="index.html">Iowa portal demo</a> &nbsp; <a class="btn btn-outline" href="uiux.html">UI/UX demo</a></p>
+</section>
 
-<section><div class="container">
-<h2>SELECTED WORK</h2>
-<div class="card-grid">
-<div class="card"><h3>Centene — Member Self-Service Portal Modernization</h3><p>Senior .NET &amp; Front-End Accessibility Developer, Nov 2023–present, St. Louis, Missouri. .NET 6 → .NET 8, Figma → design-system components in Storybook, axe-core in Azure DevOps, PHI/PII with .NET encryption, HIPAA.</p></div>
-<div class="card"><h3>Frontiers — Author and Reviewer Submission Platform</h3><p>Senior Front-End &amp; .NET Software Developer, Aug 2021–Oct 2023, Tampa, Florida. .NET Core 3.1 → .NET 6, Angular/TypeScript, shared component library, WCAG fixes via axe/WAVE, NVDA/JAWS.</p></div>
-<div class="card"><h3>New Jersey DOL — Unemployment Insurance Claimant Services</h3><p>Senior Software Developer (.NET / UI), Dec 2019–Aug 2021, Trenton, New Jersey. MVC + Web Forms, Section 508/WCAG remediation, mainframe batch interfaces, .NET encryption for SSN/wage/bank data.</p></div>
-<div class="card"><h3>Fidelity — Retirement Account Services</h3><p>Software Developer (.NET &amp; SQL), May 2017–Sep 2019, New York. .NET Framework 4.x, MVC, Web API, NUnit, SQL Server.</p></div>
-</div>
-<p>Full case studies: <a href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio/blob/main/docs/frontend-uiux-case-studies.md">docs/frontend-uiux-case-studies.md on GitHub</a>. Working demos: <a href="uiux.html">UI/UX page</a> and <a href="index.html">portal demo</a>. Full code: <a href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio">github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio</a>.</p>
-<p><strong>What is not claimed:</strong> no accessibility certification, no HCI degree, and no outcome metrics the resume does not give. This is an independent portfolio demonstration, not a State of Iowa system.</p>
-</div></section>
+<section id="about" aria-labelledby="about-title">
+  <h2 id="about-title">About</h2>
+  <p class="lead">Hi, I'm Padmakshi — a Senior Full Stack .NET Developer with 10+ years in healthcare, banking, government, and airlines, building .NET back ends and accessible front ends, and supporting what ships. Based in Texas, US, open to contract roles.</p>
+  <p><button class="btn btn-dark" type="button" id="play-intro-btn">▶ Play my intro</button></p>
+  <p><video id="intro-video" controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken intro video of Padmakshi Bhonagiri"><source src="intro-video-female.mp4" type="video/mp4">Your browser does not support this video.</video></p>
+  <div class="skillpills" aria-label="Skills">
+    <span>C#</span><span>.NET 8</span><span>ASP.NET Core</span><span>Web API</span><span>Entity Framework Core</span><span>Angular</span><span>React</span><span>HTML5</span><span>CSS / SCSS</span><span>SQL Server</span><span>Azure</span><span>Azure DevOps</span>
+  </div>
+  <div class="timeline">
+    <article><h3>Centene</h3><p>Nov 2023 — Present · Tampa, FL · Senior Full Stack .NET Developer, healthcare, microservices and Agile delivery.</p></article>
+    <article><h3>Frontiers</h3><p>Aug 2021 — Oct 2023 · Tampa, FL · Senior Full Stack .NET Developer, front-end and UI/UX led enterprise work.</p></article>
+    <article><h3>State of New Jersey</h3><p>Dec 2019 — Aug 2021 · Full Stack .NET Developer, secure public-sector systems.</p></article>
+    <article><h3>Fidelity</h3><p>May 2017 — Sep 2019 · New York, NY · .NET Developer, financial-services applications at enterprise scale.</p></article>
+    <article><h3>Tradelab</h3><p>Nov 2015 — Apr 2017 · India · .NET Developer, the foundation role.</p></article>
+  </div>
+</section>
 
-<section class="contact"><div class="container">
-<h2>LET'S GET IN TOUCH</h2>
-<p>For roles, code samples, and the full resume, please use the contact details on my resume, or start here:</p>
-<p><a class="btn" href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio" style="background:#fff;color:#0f3556;">View the full code on GitHub</a> <a class="btn" href="uiux.html">See the UI/UX work</a></p>
-<p>Fictional demo data only in the portal pages. No real personal information is published on this site.</p>
-</div></section>
+<section id="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title">Contact</h2>
+  <p class="lead">A quick intro: Hi, I'm Padmakshi — a Senior Full Stack .NET Developer with 10+ years, building .NET back ends and accessible front ends. Let's talk about your next contract role.</p>
+  <p><video controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken intro video of Padmakshi Bhonagiri"><source src="intro-video-female.mp4" type="video/mp4">Your browser does not support this video.</video></p>
+  <div class="contact-links">
+    <a class="btn btn-dark" href="mailto:padhupadmakshib@gmail.com">✉ Email me</a>
+    <a class="btn btn-outline" href="tel:+16503053270">📞 +1 (650) 305-3270</a>
+    <a class="btn btn-outline" href="https://github.com/PadhuPadmakshi">GitHub</a>
+    <button class="btn btn-outline" type="button" id="copy-email">Copy email</button>
+    <span id="copy-status" role="status"></span>
+    <a class="btn btn-white" style="border:2px solid #0f172a" href="Padmakshi_Bhonagiri_Resume_Iowa_DOM_DoIT.docx" download>⬇ Download Resume</a>
+  </div>
+</section>
 </main>
+
+<footer>
+  <p>© Padmakshi Bhonagiri · Texas, US · GC EAD · <a href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio">Portfolio source on GitHub</a></p>
+</footer>
+
+<div class="backdrop" id="intro-modal" role="dialog" aria-modal="true" aria-labelledby="intro-modal-title" hidden>
+  <div class="modal">
+    <h2 id="intro-modal-title">Hi, I'm Padmakshi</h2>
+    <p>I'm a Senior Full Stack .NET Developer with 10+ years building enterprise software — in healthcare, banking and financial services, government, and airlines. My core is C# and .NET: ASP.NET Core, Web API, and Entity Framework Core, with Angular and React on the front end, built to be responsive and accessible.</p>
+    <p>I build, modernize, and support applications end to end — from APIs and data to the screen in front of the user — and I'm based in Texas, US, open to contract roles.</p>
+    <p><video controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken intro video of Padmakshi Bhonagiri"><source src="intro-video-female.mp4" type="video/mp4">Your browser does not support this video.</video></p>
+    <p style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <a class="btn btn-dark" href="mailto:padhupadmakshib@gmail.com">✉ Email me</a>
+      <a class="btn btn-outline" href="Padmakshi_Bhonagiri_Resume_Iowa_DOM_DoIT.docx" download>⬇ Download Resume</a>
+      <button class="btn btn-outline" type="button" id="intro-close">Close</button>
+    </p>
+    <p><a href="#contact" id="intro-to-contact">See the full contact section ↓</a></p>
+  </div>
+</div>
+
+<script>
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Dark mode, persisted
+  var darkBtn = document.getElementById("dark-toggle");
+  var saved = null; try { saved = localStorage.getItem("padmakshi-theme"); } catch(e) {}
+  if (saved === "dark") { document.body.classList.add("dark"); darkBtn.textContent = "☀️"; darkBtn.setAttribute("aria-pressed", "true"); }
+  darkBtn.addEventListener("click", function(){
+    var dark = document.body.classList.toggle("dark");
+    darkBtn.textContent = dark ? "☀️" : "🌙";
+    darkBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+    try { localStorage.setItem("padmakshi-theme", dark ? "dark" : "light"); } catch(e) {}
+  });
+  // Cursor-tracking character: head/avatar follows the pointer, returns to centre when idle, winks
+  var hero = document.getElementById("hero");
+  var avatar = document.getElementById("cursor-avatar");
+  var wink = document.getElementById("wink-badge");
+  var idleTimer = null;
+  function onMove(e){
+    if (reduced || !avatar) return;
+    var r = hero.getBoundingClientRect();
+    var x = (e.clientX - r.left) / Math.max(r.width, 1) - 0.5;
+    var y = (e.clientY - r.top) / Math.max(r.height, 1) - 0.5;
+    avatar.style.transform = "translate(" + (x * 36) + "px," + (y * 22) + "px) rotate(" + (x * 3) + "deg)";
+    wink.classList.remove("show");
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function(){
+      avatar.style.transform = "translate(0,0) rotate(0deg)";
+      wink.classList.add("show");
+      setTimeout(function(){ wink.classList.remove("show"); }, 900);
+    }, 2500);
+  }
+  if (hero) hero.addEventListener("pointermove", onMove);
+  if (!window.matchMedia("(pointer: fine)").matches) {
+    setInterval(function(){ if (wink) { wink.classList.add("show"); setTimeout(function(){ wink.classList.remove("show"); }, 900); } }, 9000);
+  }
+  // Let's Talk opens the intro
+  var letsTalk = document.getElementById("lets-talk-btn");
+  var modal = document.getElementById("intro-modal");
+  var closeBtn = document.getElementById("intro-close");
+  var toContact = document.getElementById("intro-to-contact");
+  function openModal(){ modal.hidden = false; modal.classList.add("open"); if (closeBtn) closeBtn.focus(); }
+  function closeModal(){ modal.classList.remove("open"); modal.hidden = true; if (letsTalk) letsTalk.focus(); }
+  if (letsTalk) letsTalk.addEventListener("click", openModal);
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  if (modal) modal.addEventListener("click", function(e){ if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal(); });
+  if (toContact) toContact.addEventListener("click", function(){
+    closeModal();
+    var c = document.getElementById("contact");
+    if (c) c.scrollIntoView({behavior: reduced ? "auto" : "smooth"});
+  });
+  // Play button: unmutes, turns volume up, and plays the spoken intro
+  var playBtn = document.getElementById("play-intro-btn");
+  var introVideo = document.getElementById("intro-video");
+  if (playBtn && introVideo){
+    playBtn.addEventListener("click", function(){
+      introVideo.muted = false;
+      introVideo.volume = 1;
+      introVideo.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "center"});
+      var pr = introVideo.play();
+      if (pr) pr.catch(function(){});
+      playBtn.textContent = "▶ Playing my intro…";
+      introVideo.addEventListener("ended", function(){ playBtn.textContent = "▶ Play my intro again"; }, {once: true});
+    });
+  }
+  // Copy email
+  var copyBtn = document.getElementById("copy-email");
+  var copyStatus = document.getElementById("copy-status");
+  if (copyBtn) copyBtn.addEventListener("click", function(){
+    var done = function(){ copyStatus.textContent = "Email copied."; };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText("padhupadmakshib@gmail.com").then(done); }
+    else { copyStatus.textContent = "padhupadmakshib@gmail.com"; }
+  });
+</script>
 </body>
 </html>
