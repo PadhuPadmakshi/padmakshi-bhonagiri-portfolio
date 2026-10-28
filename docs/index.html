@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iowa Public Services Portal — Code-Sample Portfolio</title>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="container site-header__inner">
+<a class="site-header__brand" href="#">Iowa Public Services Portal</a>
+<nav class="site-nav" aria-label="Main"><ul>
+<li><a href="#services">Services</a></li>
+<li><a href="#apply">Apply</a></li>
+<li><a href="#status">Check status</a></li>
+<li><a href="#design">Design system</a></li>
+</ul></nav>
+</div></header>
+<div class="disclaimer-banner"><div class="container">Fictional demo only — not a State of Iowa system. No real personal information. The full ASP.NET Core app is in the code repository below; this static page is its GitHub Pages demo so the UI opens from a link.</div></div>
+<main id="main" class="container">
+<h1>Iowa Public Services Portal — a working code-sample portfolio</h1>
+<p class="lead">For the State of Iowa DOM DoIT Senior .NET Developer and Front-End / UI / UX Developer role. By Padmakshi Bhonagiri, Senior .NET and Front-End UI/UX Developer, 10+ years.</p>
+<p><strong>Full code on GitHub:</strong> <a href="https://github.com/PadhuPadmakshi/iowa-doit-portfolio">https://github.com/PadhuPadmakshi/iowa-doit-portfolio</a><br>
+<strong>Run the full app locally:</strong> <code>dotnet run --project src/IowaPortal.Web</code> — then open the URL it prints. Tests: <code>dotnet test</code></p>
+
+<div class="alert alert--info" role="note"><h2>What this is, and what it is not</h2>
+<p>This is an independently developed portfolio demonstration. It is <strong>not</strong> a State of Iowa system, <strong>not</strong> a production service, and holds <strong>no government security authorization</strong>. All programs, applicants, and reference numbers here are fictional.</p></div>
+
+<h2 id="services">Sample services</h2>
+<div class="card-grid">
+<div class="card"><h3>Health Coverage Assistance</h3><p>Help understanding coverage options and finding providers.</p></div>
+<div class="card"><h3>Benefits Application Support</h3><p>Apply for fictional sample programs and track the application.</p></div>
+<div class="card"><h3>Claims History</h3><p>Review sample claims and their status in plain language.</p></div>
+<div class="card"><h3>Provider Search</h3><p>Find sample providers by location and service type.</p></div>
+</div>
+
+<h2 id="apply">Apply — sample form</h2>
+<p id="form-status" role="status"></p>
+<div id="error-summary" class="error-summary" hidden><h2>There is a problem</h2><ul id="error-list"></ul></div>
+<form id="apply-form" novalidate>
+<div class="form-group"><label class="form-label" for="FirstName">First name</label><input class="form-control" id="FirstName" name="firstName" autocomplete="given-name" required></div>
+<div class="form-group"><label class="form-label" for="LastName">Last name</label><input class="form-control" id="LastName" name="lastName" autocomplete="family-name" required></div>
+<div class="form-group"><label class="form-label" for="Email">Email address</label><span class="form-hint" id="email-hint">For example, jordan@example.com</span><input class="form-control" id="Email" name="email" type="email" aria-describedby="email-hint" autocomplete="email" required></div>
+<div class="form-group"><label class="form-label" for="County">County</label><input class="form-control" id="County" name="county" value="Polk" required></div>
+<div class="form-group"><label class="form-label" for="HouseholdSize">Household size</label><input class="form-control" id="HouseholdSize" name="householdSize" type="number" min="1" value="3" required></div>
+<div class="form-group"><input type="checkbox" id="Terms" required> <label for="Terms">I understand this is a fictional sample application.</label></div>
+<button class="btn" type="submit">Submit sample application</button>
+</form>
+<div id="confirmation" class="alert alert--success" hidden>
+<h2>Sample application received</h2>
+<p>Your reference number is <strong id="ref-number"></strong>. Use it below to check status. In the full ASP.NET app, this reference is created server-side and stored in the database; here it is held only in this browser page.</p>
+</div>
+
+<h2 id="status">Check status</h2>
+<form id="status-form">
+<div class="form-group"><label class="form-label" for="Ref">Reference number</label><input class="form-control" id="Ref" name="ref" placeholder="IA-2026-0001"></div>
+<button class="btn btn--secondary" type="submit">Check status</button>
+</form>
+<p id="status-result" role="status"></p>
+
+<h2 id="design">Design system — tokens, not one-off styles</h2>
+<p>Colours, spacing, and type come from tokens in <code>wwwroot/scss/_tokens.scss</code> in the full repo, so a second team can adopt them without copying pages.</p>
+<table class="data-table"><caption>Design tokens used on this page</caption>
+<thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Swatch</th></tr></thead>
+<tbody>
+<tr><td>Primary</td><td>#0f3556</td><td><span class="swatch swatch--primary"></span></td></tr>
+<tr><td>Primary dark</td><td>#0a243c</td><td><span class="swatch swatch--primary-dark"></span></td></tr>
+<tr><td>Success</td><td>#1b5e20</td><td><span class="swatch swatch--success"></span></td></tr>
+<tr><td>Error</td><td>#8b1e1e</td><td><span class="swatch swatch--error"></span></td></tr>
+</tbody></table>
+<p><button class="btn" type="button" data-dialog-open>Open dialog demo</button></p>
+<div id="example-dialog" class="dialog-backdrop" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+<h2 id="dialog-title">Dialog demo — keyboard accessible</h2>
+<p>Tab stays inside this dialog, Escape closes it, and focus returns to the button that opened it.</p>
+<button class="btn" type="button" data-dialog-close>Close dialog</button>
+</div></div>
+
+<h2>What the full repo adds beyond this static page</h2>
+<ul>
+<li>ASP.NET Core 8 MVC + Web API, clean layers (Domain / Application / Infrastructure / Web), EF Core, SQL Server by configuration</li>
+<li>REST API: <code>GET /api/services</code>, <code>GET /api/applications/{reference}</code>, <code>POST /api/applications</code></li>
+<li>xUnit tests, Azure DevOps pipeline, legacy WebForms sample, SQL scripts, Angular excerpt</li>
+<li>Accessibility: WCAG 2.1 AA target, Section 508, axe + keyboard + JAWS workflow, documented in <code>docs/accessibility-testing.md</code></li>
+</ul>
+<p><a class="btn" href="https://github.com/PadhuPadmakshi/iowa-doit-portfolio">View the full code on GitHub</a></p>
+</main>
+<footer class="site-footer"><div class="container"><p>Fictional portfolio demo by Padmakshi Bhonagiri. Full code: <a href="https://github.com/PadhuPadmakshi/iowa-doit-portfolio">github.com/PadhuPadmakshi/iowa-doit-portfolio</a></p></div></footer>
+<script>
+(function () {
+  'use strict';
+  var ref = null;
+  var dialog = document.getElementById('example-dialog');
+  var openBtn = document.querySelector('[data-dialog-open]');
+  var closeBtn = document.querySelector('[data-dialog-close]');
+  var lastFocused = null;
+  function focusableIn(el) { return Array.prototype.filter.call(el.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'), function (n) { return !n.disabled && n.offsetParent !== null; }); }
+  function openDialog() { lastFocused = document.activeElement; dialog.hidden = false; var f = focusableIn(dialog)[0]; if (f) f.focus(); dialog.addEventListener('keydown', trap); }
+  function closeDialog() { dialog.hidden = true; dialog.removeEventListener('keydown', trap); if (lastFocused) lastFocused.focus(); }
+  function trap(e) { if (e.key === 'Escape') { closeDialog(); return; } if (e.key !== 'Tab') return; var items = focusableIn(dialog); if (!items.length) return; var first = items[0], last = items[items.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
+  if (openBtn) openBtn.addEventListener('click', openDialog);
+  if (closeBtn) closeBtn.addEventListener('click', closeDialog);
+  var form = document.getElementById('apply-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var errors = [];
+    ['FirstName', 'LastName', 'Email', 'County', 'HouseholdSize'].forEach(function (id) { var el = document.getElementById(id); el.classList.remove('form-control--error'); if (!el.value.trim()) errors.push([id, 'Enter a value for this field.']); });
+    var email = document.getElementById('Email');
+    if (email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) errors.push(['Email', 'Enter an email address in the correct format, like name@example.com.']);
+    if (!document.getElementById('Terms').checked) errors.push(['Terms', 'Confirm you understand this is a fictional sample application.']);
+    var summary = document.getElementById('error-summary'), list = document.getElementById('error-list');
+    if (errors.length) { list.innerHTML = ''; errors.forEach(function (er) { var li = document.createElement('li'); var a = document.createElement('a'); a.href = '#' + er[0]; a.textContent = er[1]; li.appendChild(a); list.appendChild(li); var el = document.getElementById(er[0]); if (el) el.classList.add('form-control--error'); }); summary.hidden = false; summary.focus(); document.getElementById('form-status').textContent = 'Please fix the errors before submitting.'; return; }
+    summary.hidden = true;
+    ref = 'IA-2026-0001';
+    document.getElementById('ref-number').textContent = ref;
+    document.getElementById('confirmation').hidden = false;
+    document.getElementById('Ref').value = ref;
+    document.getElementById('form-status').textContent = 'Sample application received.';
+    document.getElementById('confirmation').scrollIntoView();
+  });
+  document.getElementById('status-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = document.getElementById('Ref').value.trim();
+    document.getElementById('status-result').textContent = (v === ref) ? 'Status for ' + v + ': Received — sample application (fictional demo).' : 'No sample application was found for that reference on this page. Submit the sample form above first, or run the full ASP.NET app for server-side lookup.';
+  });
+})();
+</script>
+</body>
+</html>
