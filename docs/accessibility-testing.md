@@ -6,7 +6,8 @@ on the basis of an automated tool alone.
 
 ## Honest scope
 
-- The author's resume does **not** document formal WCAG training or an
+- The author's Iowa-tailored resume documents formal WCAG training and
+  routine JAWS/NVDA testing plus axe remediation, but names no specific
   accessibility certification (IAAP WAS/CPACC, DHS Trusted Tester, or
   equivalent). None is claimed in this portfolio.
 - What is demonstrated: hands-on WCAG 2.1 AA implementation, axe-based

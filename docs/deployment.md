@@ -3,13 +3,13 @@
 ## Option A — GitHub repository (recommended first step, no account approval needed beyond your own GitHub account)
 
 ```bash
-cd iowa-doit-portfolio
+cd padmakshi-bhonagiri-portfolio
 git init
 git add .
 git commit -m "Initial portfolio: accessible ASP.NET Core public-services demo"
 # Create an EMPTY repository on github.com (do not add a README there),
 # then:
-git remote add origin https://github.com/<your-username>/iowa-doit-portfolio.git
+git remote add origin https://github.com/<your-username>/padmakshi-bhonagiri-portfolio.git
 git branch -M main
 git push -u origin main
 ```

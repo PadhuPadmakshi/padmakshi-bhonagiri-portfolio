@@ -12,11 +12,13 @@ blocks delivery, or — as in this portfolio's scenario — the organization
 is standardizing on modern practices and the page is being actively
 enhanced anyway.
 
-The author's resume shows both sides of this judgment: migrating
-VB.NET applications to .NET Core 6 at Frontiers (reported 40% faster
-startup, 30% lower memory) and migrating ASP.NET pages to MVC at the
-State of New Jersey, while also maintaining WebForms applications at
-Tradelab. Modernization here means moving business logic out of
+The author's Iowa-tailored resume shows both sides of this judgment:
+.NET 6 → .NET 8 at Centene (Member Self-Service Portal Modernization),
+.NET Core 3.1 → .NET 6 at Frontiers (Author and Reviewer Submission
+Platform), and bringing Web Forms pages up to Section 508 and WCAG 2.1 AA
+at the State of New Jersey Department of Labor & Workforce Development
+(Unemployment Insurance Claimant Services Modernization), while also
+maintaining WebForms applications at Tradelab and New Jersey. Modernization here means moving business logic out of
 code-behind into testable services — not just changing the UI framework.
 
 ## WebForms vs. modern ASP.NET Core MVC — the differences that matter
