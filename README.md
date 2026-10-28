@@ -6,6 +6,10 @@ Developer opportunity.
 
 **By:** Padmakshi Bhonagiri, Senior Full Stack .NET Developer (10+ years).
 
+**GitHub / Portfolio:** https://github.com/PadhuPadmakshi/iowa-doit-portfolio
+
+**Live UI (GitHub Pages, static demo):** https://padhupadmakshi.github.io/iowa-doit-portfolio/ — this opens the UI in a browser with no install. The full ASP.NET Core app cannot run on GitHub Pages (static hosting only), so the Pages site is a static demo of the same journey; run `dotnet run --project src/IowaPortal.Web` for the full server app.
+
 **What this is:** a complete, runnable ASP.NET Core demonstration
 application — a fictional public-services eligibility and benefits portal
 with an accessible Apply → Confirmation → Status journey, a token-based
