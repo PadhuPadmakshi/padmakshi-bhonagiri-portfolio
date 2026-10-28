@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = "Code samples";
+}
+<h1>Code samples — organized for a technical interviewer</h1>
+<p>Start with the running app, then read in this order. Each section names the file, what it demonstrates, and what to discuss.</p>
+
+<h2>C# / .NET and clean architecture</h2>
+<ul>
+    <li><code>src/IowaPortal.Domain/Entities.cs</code> — entities and enums with no framework dependencies.</li>
+    <li><code>src/IowaPortal.Application/ApplicationService.cs</code> — use-case orchestration, reference-number generation, and the single validation entry point.</li>
+    <li><code>src/IowaPortal.Application/EligibilityService.cs</code> — a pure, testable business rule with an explicit "fictional, not a real rule" boundary.</li>
+    <li><code>src/IowaPortal.Web/Program.cs</code> — dependency injection wiring and the InMemory → SQL Server configuration switch.</li>
+</ul>
+
+<h2>REST APIs and middleware</h2>
+<ul>
+    <li><code>src/IowaPortal.Web/Controllers/ApiController.cs</code> — <code>GET /api/services</code>, <code>GET /api/applications/{reference}</code>, <code>POST /api/applications</code> (201 + Location, field-keyed 400, 404).</li>
+    <li><code>src/IowaPortal.Web/Middleware/Middleware.cs</code> — security headers and ProblemDetails exception handling with correlation ids (no stack traces to clients).</li>
+</ul>
+
+<h2>SQL Server and data access</h2>
+<ul>
+    <li><code>src/IowaPortal.Infrastructure/PortalDbContext.cs</code> and <code>Repositories.cs</code> — EF Core, repository pattern, unique index on reference numbers.</li>
+    <li><code>src/IowaPortal.Infrastructure/AdoNetExample.cs</code> — parameterized <code>SqlCommand</code> example, with the injection-vulnerable pattern shown only as a commented warning.</li>
+    <li><code>samples/sql/</code> — table creation and a parameterized stored-procedure-style query.</li>
+</ul>
+
+<h2>HTML5, Sass/SCSS, and JavaScript</h2>
+<ul>
+    <li><code>src/IowaPortal.Web/Views/Applications/Apply.cshtml</code> — the complete accessible form: error summary, hints, <code>aria-describedby</code>, <code>aria-invalid</code>.</li>
+    <li><code>src/IowaPortal.Web/wwwroot/scss/</code> — tokens, maps, mixins, responsible nesting, modular files; compiled to <code>wwwroot/css/site.css</code> with Dart Sass.</li>
+    <li><code>src/IowaPortal.Web/wwwroot/js/site.js</code> — vanilla JS: dialog focus trap, Escape, focus return, progressive enhancement (forms work without JS).</li>
+</ul>
+
+<h2>Reusable UI components and the design system</h2>
+<ul>
+    <li><code>src/IowaPortal.Web/Views/Home/DesignSystem.cshtml</code> — live tokens, buttons, alerts, cards, tables, and the dialog demo.</li>
+    <li><code>docs/design-system.md</code> — system vs. library vs. framework, token governance, and the multi-team adoption plan.</li>
+</ul>
+
+<h2>Accessibility remediation</h2>
+<ul>
+    <li><code>docs/accessibility-testing.md</code> — keyboard, JAWS, focus, contrast, reflow, and WCAG 2.1 AA checklist, plus six before/after fixes.</li>
+    <li><code>scripts/a11y-smoke-check.js</code> — CI smoke check (labels, headings, link text). Labelled as a smoke check, not a compliance proof.</li>
+</ul>
+
+<h2>Legacy modernization</h2>
+<ul>
+    <li><code>samples/legacy/</code> — a representative WebForms page + code-behind, with a side-by-side modernization analysis in <code>docs/legacy-modernization.md</code>: what to keep, what to replace, and when maintaining WebForms is the right call.</li>
+    <li>Relevant resume evidence: .NET 6 → .NET 8 at Centene, .NET Core 3.1 → .NET 6 at Frontiers, and Web Forms Section 508/WCAG remediation at the State of New Jersey Department of Labor &amp; Workforce Development.</li>
+</ul>
+
+<h2>Automated tests</h2>
+<ul>
+    <li><code>tests/IowaPortal.Tests/</code> — xUnit: validation success/failure, eligibility thresholds, service success and not-found paths, repository round-trip on InMemory EF.</li>
+    <li>Run with <code>dotnet test</code>. Every test names the behaviour it protects, not just the method it calls.</li>
+</ul>
+
+<h2>Azure DevOps CI/CD and security</h2>
+<ul>
+    <li><code>azure-pipelines.yml</code> — restore, build, test, accessibility smoke check, publish artifact. No secrets in the pipeline; configuration via variables / Key Vault.</li>
+    <li><code>docs/security.md</code> — environment variables, secrets handling, encryption considerations, what this demo deliberately does not collect (no SSN, no date of birth), and why it has no government authorization.</li>
+    <li><code>docs/deployment.md</code> — GitHub publishing steps, Azure App Service option, and a future AWS note (no AWS resources are created by this demo).</li>
+</ul>
+
+<h2>Angular — where it fits, and where it does not</h2>
+<p>Angular and TypeScript are on the author's Iowa-tailored resume (Frontiers, Author and Reviewer Submission Platform). A representative component excerpt is in <code>samples/angular/</code> to show component, template, and accessibility patterns. It is not wired into the running portal, because the DOM DoIT transition described in the job posting is Bootstrap/Material → enterprise design system, and adding a second front-end framework to this demo would demonstrate keyword-matching, not judgment.</p>

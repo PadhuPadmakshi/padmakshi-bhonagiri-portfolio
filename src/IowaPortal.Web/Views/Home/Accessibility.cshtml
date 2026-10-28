@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Accessibility";
+}
+<h1>Accessibility first — WCAG 2.1 AA target, honestly stated</h1>
+<p><strong>Target:</strong> WCAG 2.1 AA and Section 508. <strong>Not claimed:</strong> full compliance or a WCAG certification. Formal WCAG training is documented on the author's Iowa-tailored resume, with routine JAWS/NVDA testing and axe remediation, but no specific certification is named or claimed. No automated tool can prove compliance, and this page does not pretend otherwise. What follows is what was actually built, what was actually checked, and what still requires manual testing with assistive technology.</p>
+
+<h2>What is built into every page</h2>
+<ul>
+    <li>Semantic landmarks: <code>header</code>, <code>nav</code> with an accessible name, <code>main</code>, <code>footer</code>; one <code>h1</code> per page, headings in order, no skipped levels.</li>
+    <li>Skip link as the first tab stop; visible focus (3px outline + offset) on every interactive element; logical focus order following visual order.</li>
+    <li>Visible labels for every form control (never placeholder-only), hints via <code>aria-describedby</code>, required fields marked in text as well as with <code>aria-required</code>.</li>
+    <li>Error summary that links to each field, plus inline field errors with <code>aria-invalid</code> and <code>aria-describedby</code> pointing at the error text.</li>
+    <li>Status announcements via <code>role="status"</code> / <code>aria-live="polite"</code>; errors via <code>role="alert"</code> only for the summary (inline errors are not alerts, to avoid repeated announcements).</li>
+    <li>Colour is never the only means of conveying information: status badges carry text + icon, links are underlined, errors carry text + border.</li>
+    <li>Contrast-checked palette (see tokens file), 16px minimum body text, responsive reflow at 320px and 200% zoom, <code>prefers-reduced-motion</code> respected.</li>
+    <li>ARIA only where native HTML cannot express the state (dialog <code>aria-modal</code>, <code>aria-describedby</code> for hints/errors). No redundant <code>role="button"</code> on real buttons, no <code>aria-label</code> overriding visible text.</li>
+</ul>
+
+<h2>Automated checks vs. manual testing — kept separate on purpose</h2>
+<table class="data-table">
+    <caption>What each kind of testing can and cannot prove</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Catches</th><th scope="col">Cannot prove</th></tr></thead>
+    <tbody>
+        <tr><th scope="row">axe (automated)</th><td>Missing labels, missing alt text, contrast failures, invalid ARIA, heading order, duplicate ids</td><td>Whether the page makes sense with a screen reader, whether focus order is logical, whether error recovery is usable</td></tr>
+        <tr><th scope="row">Keyboard-only pass</th><td>Keyboard traps, missing focus, invisible focus, unreachable controls, mouse-only interactions</td><td>Screen-reader announcement quality</td></tr>
+        <tr><th scope="row">JAWS (manual)</th><td>Heading/landmark navigation, form-mode behaviour, live-region announcements, dialog announcements, link purpose</td><td>— (this is the closest to real use, and the slowest, which is why it is a checklist, not an afterthought)</td></tr>
+    </tbody>
+</table>
+<p><strong>The rule used in this project:</strong> "axe reports no violations" is reported as exactly that — no automated violations found on the pages checked — never as "the page is compliant." A page is only described as manually verified after the keyboard + JAWS checklist in <code>docs/accessibility-testing.md</code> has been run against it.</p>
+
+<h2>Before / after — six common failures, corrected in this codebase</h2>
+<ol>
+    <li><strong>Missing labels → visible labels.</strong> Before: <code>&lt;input placeholder="Email"&gt;</code>. After: a real <code>&lt;label for="Email"&gt;</code> plus a hint span. Placeholders disappear on input; labels do not.</li>
+    <li><strong>Inaccessible validation → error summary + field errors.</strong> Before: red text alone, or a JavaScript <code>alert()</code>. After: the Apply page's summary with links, <code>role="alert"</code>, and per-field <code>aria-describedby</code>.</li>
+    <li><strong>Incorrect headings → one h1, in order.</strong> Before: an <code>h3</code> used for visual size after an <code>h1</code>. After: heading level follows document structure; visual size comes from CSS, not heading level.</li>
+    <li><strong>Keyboard trap → focus trap done right.</strong> Before: a modal that Tab cannot leave. After: the dialog demo traps Tab <em>inside</em> the dialog while it is open, and Escape returns focus to the opener — the trap ends when the dialog closes.</li>
+    <li><strong>Inadequate contrast → checked tokens.</strong> Before: light-grey text on white. After: body text <code>#17202a</code> on white (≈16.5:1), muted text <code>#44546a</code> (≈7.0:1). Every token change must be re-checked.</li>
+    <li><strong>Missing accessible names → named controls.</strong> Before: icon-only buttons with no text. After: every control has visible text or, where an icon is genuinely decorative, <code>aria-hidden</code> on the icon and text on the control. This demo avoids icon-only controls entirely.</li>
+</ol>
+
+<h2>How to test this application</h2>
+<p>Full checklist, JAWS script, and axe instructions: <code>docs/accessibility-testing.md</code> in the repository. In brief: (1) run the axe browser extension on Home, Services, Apply (valid and error states), Confirmation, Status, and Design System; (2) complete the Apply journey with keyboard only; (3) repeat it with JAWS, checking heading navigation, form mode, error announcement, and dialog behaviour; (4) check 200% zoom, 320px width, and high-contrast mode. Record findings in the checklist — do not just fix them silently, so regressions are visible.</p>
+<p>Automated smoke check included in the repo (<code>scripts/a11y-smoke-check.js</code>, run in CI) checks rendered HTML for labels, alt text, heading order, and link text. It is a smoke check, not an axe replacement, and it is labelled as such in the pipeline.</p>
