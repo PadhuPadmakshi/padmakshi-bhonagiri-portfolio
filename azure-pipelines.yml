@@ -1,0 +1,48 @@
+# Azure DevOps CI pipeline for the Iowa Portal portfolio demo.
+# Stages: restore -> build -> test -> accessibility smoke check -> publish.
+# No secrets are referenced here. Deployment credentials, if added later,
+# must come from pipeline variables / variable groups (see docs/security.md).
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dotnetVersion: '8.0.x'
+
+steps:
+  - task: UseDotNet@2
+    displayName: 'Install .NET SDK'
+    inputs:
+      version: $(dotnetVersion)
+
+  - script: dotnet restore IowaPortal.sln
+    displayName: 'Restore dependencies'
+
+  - script: dotnet build IowaPortal.sln --configuration $(buildConfiguration) --no-restore
+    displayName: 'Build solution'
+
+  - script: dotnet test tests/IowaPortal.Tests --configuration $(buildConfiguration) --no-build
+    displayName: 'Run xUnit tests'
+
+  # Accessibility SMOKE check only. It starts the app, runs the Node
+  # script against its pages, and stops the app. It does not replace
+  # axe DevTools or a manual JAWS pass (see docs/accessibility-testing.md).
+  - script: |
+      dotnet run --project src/IowaPortal.Web --urls http://localhost:5000 > /tmp/app.log 2>&1 &
+      APP_PID=$!
+      for i in $(seq 1 30); do curl -sf http://localhost:5000/ > /dev/null && break; sleep 2; done
+      node scripts/a11y-smoke-check.js http://localhost:5000
+      kill $APP_PID || true
+    displayName: 'Accessibility smoke check (not an axe/JAWS pass)'
+
+  - script: dotnet publish src/IowaPortal.Web --configuration $(buildConfiguration) --no-build -o $(Build.ArtifactStagingDirectory)/app
+    displayName: 'Publish web app'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifact'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/app'
+      ArtifactName: 'iowa-portal-app'
