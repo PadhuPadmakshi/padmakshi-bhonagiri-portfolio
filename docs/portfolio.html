@@ -20,7 +20,7 @@
   .pillnav a:hover{background:rgba(255,255,255,.2)}
   .pillnav button{background:transparent;border:0;color:#fff;font-size:1rem;cursor:pointer;padding:.4rem .6rem;border-radius:999px}
   /* Hero: full viewport, text left, large character right, cooler tones */
-  .hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;overflow:hidden;background:linear-gradient(100deg,#0f4c81 0%,#0e7490 55%,#0891b2 100%);color:#fff;padding:5.5rem 4rem 0 4rem}
+  .hero{min-height:82vh;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;overflow:hidden;background:linear-gradient(100deg,#0f4c81 0%,#0e7490 55%,#0891b2 100%);color:#fff;padding:5.5rem 4rem 2rem 4rem}
   .hero-text{max-width:560px}
   .hero-text .hi{font-size:.95rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin:0 0 .25rem}
   .hero-text h1{font-family:Caveat,cursive;font-size:clamp(4.5rem,9vw,8.5rem);line-height:.9;margin:0;color:#fff}
@@ -31,7 +31,7 @@
   .btn-dark{background:#0f172a;color:#fff}
   .btn-outline{background:transparent;color:#0f172a;border:2px solid #0f172a}
   .hero-char{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:center}
-  .hero-char img{height:94vh;max-height:900px;width:auto;object-fit:contain;transition:transform .3s ease-out;will-change:transform}
+  .hero-char img{height:58vh;max-height:560px;width:auto;object-fit:contain;transition:transform .3s ease-out;will-change:transform}
   .wink{position:absolute;top:22%;right:18%;font-size:2rem;opacity:0;transition:opacity .3s;pointer-events:none}
   .wink.show{opacity:1}
   section{padding:4.5rem 4rem;scroll-margin-top:90px}
@@ -71,7 +71,7 @@
   body.dark .btn-outline{color:#f1f5f9;border-color:#f1f5f9}
   @media (max-width:800px){
     .hero{grid-template-columns:1fr;padding:5.5rem 1.25rem 0}
-    .hero-char img{height:62vh}
+    .hero-char img{height:38vh}
     section{padding:3rem 1.25rem}
     .pillnav a{padding:.5rem .6rem;font-size:.7rem}
   }
@@ -116,6 +116,9 @@
     <article class="card"><div aria-hidden="true" style="font-size:2rem">🏛️</div><h3>Government Services System</h3><p>Secure, role-aware public-sector workflows for the State of New Jersey, with SQL Server reporting.</p><ul class="tags"><li>MVC</li><li>Web API</li><li>SQL Server</li></ul></article>
     <article class="card"><div aria-hidden="true" style="font-size:2rem">💰</div><h3>Financial Services Applications</h3><p>Transactional .NET and Web API services at Fidelity, built for scale and auditability.</p><ul class="tags"><li>ASP.NET</li><li>C#</li><li>ADO.NET</li></ul></article>
   </div>
+  <h3 style="margin-top:2.5rem">My experience in my own words</h3>
+  <p><button class="btn btn-dark" type="button" id="play-experience-btn">▶ Play my experience</button></p>
+  <p><video id="experience-video" controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken experience video of Padmakshi Bhonagiri" style="max-width:640px"><source src="experience-video.mp4" type="video/mp4">Your browser does not support this video.</video></p>
   <p style="margin-top:2rem"><a class="btn btn-outline" href="index.html">Iowa portal demo</a> &nbsp; <a class="btn btn-outline" href="uiux.html">UI/UX demo</a></p>
 </section>
 
@@ -123,7 +126,7 @@
   <h2 id="about-title">About</h2>
   <p class="lead">Hi, I'm Padmakshi — a Senior Full Stack .NET Developer with 10+ years in healthcare, banking, government, and airlines, building .NET back ends and accessible front ends, and supporting what ships. Based in Texas, US, open to contract roles.</p>
   <p><button class="btn btn-dark" type="button" id="play-intro-btn">▶ Play my intro</button></p>
-  <p><video id="intro-video" controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken intro video of Padmakshi Bhonagiri"><source src="intro-video-female.mp4" type="video/mp4">Your browser does not support this video.</video></p>
+  <p><video id="intro-video" controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken intro video of Padmakshi Bhonagiri" style="max-width:640px"><source src="intro-video-female.mp4" type="video/mp4">Your browser does not support this video.</video></p>
   <div class="skillpills" aria-label="Skills">
     <span>C#</span><span>.NET 8</span><span>ASP.NET Core</span><span>Web API</span><span>Entity Framework Core</span><span>Angular</span><span>React</span><span>HTML5</span><span>CSS / SCSS</span><span>SQL Server</span><span>Azure</span><span>Azure DevOps</span>
   </div>
@@ -139,7 +142,6 @@
 <section id="contact" aria-labelledby="contact-title">
   <h2 id="contact-title">Contact</h2>
   <p class="lead">A quick intro: Hi, I'm Padmakshi — a Senior Full Stack .NET Developer with 10+ years, building .NET back ends and accessible front ends. Let's talk about your next contract role.</p>
-  <p><video controls preload="none" poster="img/avatar-3d.png" aria-label="Spoken intro video of Padmakshi Bhonagiri"><source src="intro-video-female.mp4" type="video/mp4">Your browser does not support this video.</video></p>
   <div class="contact-links">
     <a class="btn btn-dark" href="mailto:padhupadmakshib@gmail.com">✉ Email me</a>
     <a class="btn btn-outline" href="tel:+16503053270">📞 +1 (650) 305-3270</a>
@@ -233,6 +235,20 @@
       if (pr) pr.catch(function(){});
       playBtn.textContent = "▶ Playing my intro…";
       introVideo.addEventListener("ended", function(){ playBtn.textContent = "▶ Play my intro again"; }, {once: true});
+    });
+  }
+  // Play experience video
+  var playExpBtn = document.getElementById("play-experience-btn");
+  var expVideo = document.getElementById("experience-video");
+  if (playExpBtn && expVideo){
+    playExpBtn.addEventListener("click", function(){
+      expVideo.muted = false;
+      expVideo.volume = 1;
+      expVideo.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "center"});
+      var pr = expVideo.play();
+      if (pr) pr.catch(function(){});
+      playExpBtn.textContent = "▶ Playing my experience…";
+      expVideo.addEventListener("ended", function(){ playExpBtn.textContent = "▶ Play my experience again"; }, {once: true});
     });
   }
   // Copy email
