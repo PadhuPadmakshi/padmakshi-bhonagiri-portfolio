@@ -66,6 +66,7 @@ see `docs/accessibility-testing.md`.
 
 1. **Home** (`/`) — portfolio landing, architecture, JD mapping, author
    background (resume only).
+1a. **Front-end / UI/UX** (`/Home/UiUx`) — the UI evidence the job description asks for: three resume case studies, a working multi-step form with progress steps and inline validation, component states with accessibility notes, and before/after accessibility fixes. Case-study detail: `docs/frontend-uiux-case-studies.md`.
 2. **Sample services** (`/Services`) — four fictional programs.
 3. **Apply** (`/Applications/Apply`) — submit the form validly, then try
    it empty and with a bad email to see the accessible error summary,
@@ -163,7 +164,7 @@ web server or database.
 | JD requirement (weight) | Where it is demonstrated |
 |---|---|
 | .NET / C# (~40%) | ASP.NET Core 8, MVC + Web API, DI, SOLID services, EF Core, legacy modernization sample |
-| Front-end, UI / UX (~40%) | Semantic HTML5, Sass design system, responsive layouts, full Apply → Confirmation → Status journey, UX copy and error recovery |
+| Front-end, UI / UX (~40%) | Semantic HTML5, Sass design system, responsive layouts, full Apply → Confirmation → Status journey, UX copy and error recovery — plus the dedicated UI/UX page (`/Home/UiUx`) and case studies in `docs/frontend-uiux-case-studies.md` (Centene, Frontiers, New Jersey DOL) |
 | Middleware and APIs (~10%) | Security-headers + exception middleware, REST API with 201/400/404 + ProblemDetails |
 | SQL Server (~10%) | EF Core (SQL Server provider by configuration), repository pattern, parameterized ADO.NET, SQL scripts |
 | Accessibility (core, across all) | WCAG 2.1 AA target, axe + JAWS workflow, before/after remediation, keyboard/dialog/form-error checklist |
