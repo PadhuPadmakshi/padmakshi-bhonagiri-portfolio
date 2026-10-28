@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Portfolio home";
+}
+<h1>Iowa Public Services Portal — a working code-sample portfolio</h1>
+<p class="lead">A complete, runnable demonstration for the State of Iowa Department of Management, Division of Information Technology (DOM DoIT) Senior .NET Developer and Front-End / UI / UX Developer role. It shows the work, not just a description of it: a real ASP.NET Core application you can run, submit a sample application through, and inspect end to end.</p>
+<p><strong>GitHub / Portfolio:</strong> <a href="https://github.com/PadhuPadmakshi/iowa-doit-portfolio">https://github.com/PadhuPadmakshi/iowa-doit-portfolio</a></p>
+
+<div class="alert alert--info" role="note">
+    <h2>Read this first — what this is, and what it is not</h2>
+    <p>This is an <strong>independently developed portfolio demonstration</strong> created to showcase relevant capabilities for this specific opportunity. It is <strong>not</strong> a State of Iowa system, <strong>not</strong> a production service, and it holds <strong>no government security authorization</strong>. All program descriptions, applicants, and reference numbers are fictional. The author does <strong>not</strong> claim a WCAG certification, formal WCAG training, or previous work for the State of Iowa — her verified background is in the <a href="#about-author">About the author</a> section below, drawn only from her resume. Accessibility here is demonstrated through code, a documented testing workflow, and honest limits (see the Accessibility page).</p>
+</div>
+
+<h2>Try the complete user journey</h2>
+<ol>
+    <li><a asp-controller="Services" asp-action="Index">Browse the sample services</a> — four fictional programs with plain-language descriptions.</li>
+    <li><a asp-controller="Applications" asp-action="Apply">Complete the sample Apply form</a> — with an accessible error summary, field-level errors, and error recovery. Try submitting it empty, then with a bad email, to see the recovery path.</li>
+    <li>On the confirmation page, note your reference number (for example, IA-2026-0001), then <a asp-controller="Applications" asp-action="Status">check its status</a>.</li>
+    <li><a asp-controller="Home" asp-action="DesignSystem">Inspect the design system</a>, including the keyboard-accessible dialog demo.</li>
+</ol>
+<p><a class="btn" asp-controller="Applications" asp-action="Apply">Start the sample application</a> <a class="btn btn--secondary" asp-controller="Home" asp-action="CodeSamples">Browse code samples</a></p>
+
+<h2>Architecture at a glance</h2>
+<p>Clean, layered ASP.NET Core 8, following the same separation the author has used in production healthcare, government, and financial-services work (see resume): presentation stays thin, business rules are testable without a web server, and data access is behind repositories.</p>
+<table class="data-table">
+    <caption>Solution layers and what each one owns</caption>
+    <thead><tr><th scope="col">Layer / project</th><th scope="col">Owns</th><th scope="col">Does not own</th></tr></thead>
+    <tbody>
+        <tr><td><code>IowaPortal.Domain</code></td><td>Entities, enums, status rules</td><td>HTTP, SQL, file I/O</td></tr>
+        <tr><td><code>IowaPortal.Application</code></td><td>Validation, eligibility screening, use cases (DTOs, services)</td><td>HTTP, EF Core</td></tr>
+        <tr><td><code>IowaPortal.Infrastructure</code></td><td>EF Core context, repositories, seed data, parameterized ADO.NET example</td><td>Business decisions</td></tr>
+        <tr><td><code>IowaPortal.Web</code></td><td>MVC views, REST API controllers, middleware, Sass design system, JavaScript</td><td>Business rules</td></tr>
+        <tr><td><code>IowaPortal.Tests</code></td><td>xUnit tests: validation, eligibility, service success/failure paths</td><td>—</td></tr>
+    </tbody>
+</table>
+<p>Dependency flow is one-way: Web → Application → Domain, and Infrastructure implements Application interfaces. Nothing in Domain or Application references ASP.NET Core.</p>
+
+<h2>How this maps to the DOM DoIT role</h2>
+<table class="data-table">
+    <caption>Role weighting from the job description, and where each is demonstrated</caption>
+    <thead><tr><th scope="col">Requirement (weight)</th><th scope="col">Demonstrated in this portfolio</th></tr></thead>
+    <tbody>
+        <tr><td>.NET / C# — about 40%</td><td>ASP.NET Core 8, MVC + Web API, dependency injection, SOLID services, EF Core, legacy modernization sample</td></tr>
+        <tr><td>Front-end, UI / UX — about 40%</td><td>Semantic HTML5, Sass design system, responsive layouts, the full Apply → Confirmation → Status journey, UX copy and error recovery</td></tr>
+        <tr><td>Middleware and APIs — about 10%</td><td>Security-headers + exception middleware, REST API with 201/400/404 + ProblemDetails, API contract in the README</td></tr>
+        <tr><td>SQL Server — about 10%</td><td>EF Core (SQL Server provider wired by configuration), repository pattern, parameterized ADO.NET example, SQL scripts in <code>samples/sql/</code></td></tr>
+        <tr><td>Accessibility — core, across all of the above</td><td>WCAG 2.1 AA target, axe + JAWS workflow, before/after remediation examples, keyboard/dialog/form-error testing checklist</td></tr>
+        <tr><td>Azure DevOps / CI/CD</td><td><code>azure-pipelines.yml</code>: restore, build, test, accessibility smoke check, publish artifact</td></tr>
+        <tr><td>Enterprise design system</td><td>Token-based system in <code>wwwroot/scss/</code>, with a written distinction from a component library and from Bootstrap/Material</td></tr>
+    </tbody>
+</table>
+
+<h2>Technology stack — only what the demo actually uses</h2>
+<ul>
+    <li><strong>Backend:</strong> C#, .NET 8, ASP.NET Core MVC + Web API, Entity Framework Core (InMemory by default; SQL Server by configuration)</li>
+    <li><strong>Front-end:</strong> Semantic HTML5, Sass/SCSS (compiled to <code>site.css</code>), vanilla JavaScript, no front-end framework in the running app</li>
+    <li><strong>Tests:</strong> xUnit</li>
+    <li><strong>CI/CD:</strong> Azure DevOps Pipelines (YAML in repo root)</li>
+    <li><strong>Not added for keyword-matching:</strong> Angular is on the author's resume (Angular 8/14/18, including Angular 18 at Centene) and a representative Angular component excerpt is in <code>samples/angular/</code>, but this portal deliberately does not ship an Angular app — the DOM DoIT environment described is Bootstrap/Material moving to an enterprise design system, and a Razor + design-system implementation demonstrates that transition more directly. AWS is documented as a future-deployment note only, not wired in.</li>
+</ul>
+
+<h2 id="about-author">About the author — resume only, no invented claims</h2>
+<p><strong>Padmakshi Bhonagiri — Senior Full Stack .NET Developer, 10+ years.</strong> Bachelor of Technology in Information Technology, JNTU Hyderabad (2011–2015). Experience drawn from her resume: Centene Corporation, Tampa, FL (Senior Full Stack .NET Developer, Nov 2023–present, Members Self-Service Portal: ASP.NET Core / .NET 8, Angular 18, SQL Server, Azure DevOps); Frontiers, Tampa, FL (.NET Developer, Aug 2021–Oct 2023, VB.NET → .NET Core 6 modernization); State of New Jersey (Dec 2019–Aug 2021, government application work, ASP.NET MVC, REST APIs, SQL Server); Fidelity Investments, NY (May 2017–Sep 2019, PCI DSS payment processing); Tradelab Technologies, India (Nov 2015–Apr 2017, ASP.NET MVC / WebForms). Core verified skills: C#, .NET 8/6, ASP.NET Core, MVC, Web API, EF Core, ADO.NET, HTML5, CSS3/SCSS, JavaScript/TypeScript, Angular, React, Bootstrap, SQL Server, Azure, AWS, Azure DevOps, Docker/Kubernetes, xUnit.</p>
+<p><strong>Honest gaps, stated plainly:</strong> the resume does not document formal WCAG training or an accessibility certification (for example, IAAP WAS/CPACC or DHS Trusted Tester), and none is claimed here. What this portfolio does show is hands-on WCAG 2.1 AA implementation and a documented axe + JAWS testing workflow, so an interviewer can evaluate the actual skill rather than a credential. Likewise, no degree in Human-Computer Interaction is claimed; the author's degree is the BTech in IT above, plus 10+ years of professional experience.</p>
+
+<h2>For interviewers</h2>
+<p>Good discussion starters in this codebase: why validation lives in the Application layer rather than only in the controller; how the design-system tokens would let a second team adopt the components without copying CSS; what the legacy WebForms sample gets wrong by modern standards and what to keep when modernizing it; and where automated accessibility checks stop and manual JAWS testing must begin. Each is documented in <code>docs/</code> and linked from the <a asp-controller="Home" asp-action="CodeSamples">Code samples page</a>.</p>
+
+<h2>Run it locally</h2>
+<pre><code>dotnet run --project src/IowaPortal.Web
+# then open http://localhost:5000 (the exact port is printed on startup)
+# Tests: dotnet test</code></pre>
+<p>Full prerequisites, configuration, SQL Server setup, and troubleshooting are in the README at the repository root (included in the download). No secrets, accounts, or cloud services are required to run the demo.</p>
