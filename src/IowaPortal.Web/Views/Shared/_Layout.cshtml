@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " — " : "")Iowa Public Services Portal (sample) — Portfolio demonstration by Padmakshi Bhonagiri</title>
+    <meta name="description" content="Independent portfolio demonstration: an accessible ASP.NET Core public-services portal with fictional sample data only. Not a State of Iowa service." />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Skip link first in tab order (WCAG 2.4.1). Visible on focus. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="site-header__brand" asp-controller="Home" asp-action="Index">Iowa Public Services Portal <span class="sr-only">(sample demonstration)</span></a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <ul>
+                    <li><a asp-controller="Home" asp-action="Index">Portfolio home</a></li>
+                    <li><a asp-controller="Services" asp-action="Index">Sample services</a></li>
+                    <li><a asp-controller="Applications" asp-action="Apply">Apply (sample)</a></li>
+                    <li><a asp-controller="Applications" asp-action="Status">Check status</a></li>
+                    <li><a asp-controller="Home" asp-action="UiUx">Front-end / UI/UX</a></li>
+                    <li><a asp-controller="Home" asp-action="DesignSystem">Design system</a></li>
+                    <li><a asp-controller="Home" asp-action="Accessibility">Accessibility</a></li>
+                    <li><a asp-controller="Home" asp-action="CodeSamples">Code samples</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="disclaimer-banner" role="note">
+        <div class="container">
+            Demonstration only — fictional sample data. This is an independent portfolio project by Padmakshi Bhonagiri. It is not affiliated with, endorsed by, or a service of the State of Iowa, and it confers no real benefit. Do not enter real personal information.
+        </div>
+    </div>
+
+    <main id="main-content" class="container" tabindex="-1">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p><strong>Iowa Public Services Portal — sample demonstration.</strong> Built by Padmakshi Bhonagiri as a code-sample portfolio for the State of Iowa DOM DoIT Senior .NET / Front-End Developer opportunity. All data on this site is fictional.</p>
+            <p>Accessibility approach: WCAG 2.1 AA is the target for this demonstration. Automated checks alone do not prove compliance — see the <a asp-controller="Home" asp-action="Accessibility">Accessibility page</a> for the manual JAWS/keyboard workflow. No WCAG certification is claimed.</p>
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
