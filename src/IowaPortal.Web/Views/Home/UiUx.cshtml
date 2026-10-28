@@ -1,0 +1,129 @@
+@{
+    ViewData["Title"] = "Front-end and UI/UX work";
+}
+<h1>Front-end and UI/UX work — shown, not just described</h1>
+<p class="lead">The DOM DoIT job description asks for a portfolio that shows UI work, not only backend code. This page is that evidence: working components, interaction patterns, and accessibility fixes, each tied to a case study in <code>docs/frontend-uiux-case-studies.md</code> and to the author's Iowa-tailored resume. No Figma files are published here — the Figma work in those cases came from client UX teams — but the translation of a design specification into a working, accessible interface is what this page demonstrates.</p>
+
+<h2>How I work from a design</h2>
+<ol>
+    <li><strong>Read the specification:</strong> spacing, type, breakpoints, interaction behaviour, and validation states — not just the picture.</li>
+    <li><strong>Tokens first:</strong> colour, spacing, and type from design tokens, so a second team can adopt the components without copying pages.</li>
+    <li><strong>Semantic structure before styling:</strong> landmarks, heading order, labelled controls, plain-language errors.</li>
+    <li><strong>Every state, designed:</strong> default, focus, error, success, disabled — for every control, plus what happens when a step fails.</li>
+    <li><strong>Keyboard and screen reader before sign-off:</strong> keyboard-only navigation, focus management and return, JAWS/NVDA, axe remediation, then a regression pass each release.</li>
+    <li><strong>Demo to UX and product before release:</strong> walk through interaction, validation, and mobile layouts, and close gaps before release.</li>
+</ol>
+
+<h2>Case studies</h2>
+<div class="card-grid">
+    <div class="card"><h3>Centene — Member Self-Service Portal Modernization</h3><p>Figma → responsive semantic HTML5/Sass/JavaScript. Enterprise design system + Storybook, Bootstrap screens migrated to design-system components, axe-core in Azure DevOps. Accessibility fixes in claims filters, date pickers, modal dialogs, and multi-step forms, checked with JAWS, NVDA, and axe.</p></div>
+    <div class="card"><h3>Frontiers — Author and Reviewer Submission Platform</h3><p>Shared component library: form fields, tables, and alerts with documented states, accessibility notes, and do/don't guidance. Multi-step submission simplified with progress steps, inline validation, and save-and-resume. WCAG fixes via axe/WAVE, checked with NVDA/JAWS.</p></div>
+    <div class="card"><h3>New Jersey DOL — Unemployment Insurance Claimant Services</h3><p>Mobile-friendly weekly certification, layout tables replaced with semantic markup, plain-language questions and error messages, shared UI controls to state standards. Tested with JAWS, keyboard-only navigation, and axe before each release.</p></div>
+</div>
+<p>Full detail, with what to look at in code for each case, is in <code>docs/frontend-uiux-case-studies.md</code>.</p>
+
+<h2>Interactive demo 1 — multi-step form with progress, inline validation, and save-and-resume</h2>
+<p>This is the Frontiers submission pattern, in miniature. It works without JavaScript too — the server Apply page is the no-JS version — but with JavaScript it shows progress, inline errors, and a saved draft note. Try it: leave a field empty, then try a bad email.</p>
+<p id="ux-form-status" role="status"></p>
+<div id="ux-error-summary" class="error-summary" hidden><h2>There is a problem</h2><ul id="ux-error-list"></ul></div>
+<p><strong>Step <span id="ux-step-label">1 of 3</span>:</strong> <span id="ux-step-name">Your details</span></p>
+<form id="ux-form" novalidate>
+    <div id="ux-step-1">
+        <div class="form-group"><label class="form-label" for="UxFirstName">First name</label><input class="form-control" id="UxFirstName" autocomplete="given-name"></div>
+        <div class="form-group"><label class="form-label" for="UxLastName">Last name</label><input class="form-control" id="UxLastName" autocomplete="family-name"></div>
+    </div>
+    <div id="ux-step-2" hidden>
+        <div class="form-group"><label class="form-label" for="UxEmail">Email address</label><span class="form-hint" id="ux-email-hint">For example, jordan@example.com</span><input class="form-control" id="UxEmail" type="email" aria-describedby="ux-email-hint" autocomplete="email"></div>
+        <div class="form-group"><label class="form-label" for="UxCounty">County</label><input class="form-control" id="UxCounty" value="Polk"></div>
+    </div>
+    <div id="ux-step-3" hidden>
+        <div class="form-group"><input type="checkbox" id="UxTerms"> <label for="UxTerms">I understand this is a fictional sample application.</label></div>
+        <p>Review: check your details above with the Back button before submitting. In a real submission form, this step would show a read-only summary — the pattern used for Frontiers save-and-resume and for NJDOL plain-language review.</p>
+    </div>
+    <p><button class="btn btn--secondary" type="button" id="ux-back" disabled>Back</button> <button class="btn" type="button" id="ux-next">Next step</button> <button class="btn" type="button" id="ux-save">Save draft</button></p>
+</form>
+<div id="ux-confirmation" class="alert alert--success" hidden><h2>Sample step complete</h2><p id="ux-confirmation-text"></p></div>
+
+<h2>Interactive demo 2 — component states, documented the way a shared library documents them</h2>
+<p>From the Frontiers shared component library: every component ships with its states and its accessibility notes, not just its default look.</p>
+<table class="data-table">
+    <caption>Component states and accessibility notes</caption>
+    <thead><tr><th scope="col">Component</th><th scope="col">States shown</th><th scope="col">Accessibility note</th></tr></thead>
+    <tbody>
+        <tr><td>Button</td><td><button class="btn" type="button">Primary</button> <button class="btn btn--secondary" type="button">Secondary</button> <button class="btn" type="button" disabled>Disabled</button></td><td>44px minimum touch target, 3px visible focus outline with offset, never colour alone.</td></tr>
+        <tr><td>Form field</td><td><label class="form-label" for="UxDemoField">Label (always visible)</label><span class="form-hint">Hint text, linked with aria-describedby</span><input class="form-control" id="UxDemoField" value="Sample value"></td><td>Label + hint + error are programmatically linked; the error summary links back to the field.</td></tr>
+        <tr><td>Alert</td><td><div class="alert alert--success" role="status"><strong>Success:</strong> text + heading, not just green.</div></td><td>Status is never colour alone — always text and a heading.</td></tr>
+        <tr><td>Dialog</td><td><button class="btn" type="button" data-dialog-open>Open dialog demo</button></td><td>Focus trap, Escape closes, focus returns to the opener — the Centene modal fix, in code.</td></tr>
+    </tbody>
+</table>
+<div class="dialog-backdrop" id="example-dialog" hidden>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-heading">
+        <h2 id="dialog-heading">Example dialog</h2>
+        <p>This dialog traps keyboard focus, closes with Escape, and returns focus to the button that opened it.</p>
+        <button class="btn" type="button" data-dialog-close>Close dialog</button>
+    </div>
+</div>
+
+<h2>Before / after — accessibility remediation, the NJDOL and Centene pattern</h2>
+<table class="data-table">
+    <caption>Before and after accessibility fixes</caption>
+    <thead><tr><th scope="col">Before</th><th scope="col">After (in this portfolio)</th><th scope="col">Checked with</th></tr></thead>
+    <tbody>
+        <tr><td>Layout tables for page layout</td><td>Semantic markup, landmarks, heading order</td><td>JAWS, keyboard-only, axe</td></tr>
+        <tr><td>Unlabelled controls, missing instructions</td><td>Visible labels, hints, error summaries linked to fields</td><td>JAWS, NVDA, axe</td></tr>
+        <tr><td>Keyboard traps, lost focus on dialog close</td><td>Focus trap with Escape and focus return</td><td>Keyboard-only, JAWS, NVDA</td></tr>
+        <tr><td>Low-contrast text, colour-only status</td><td>Dark text on light backgrounds, status in text + heading</td><td>axe, WAVE (Frontiers)</td></tr>
+        <tr><td>Technical error messages</td><td>Plain-language questions and errors, reviewed with business analysts</td><td>UAT walkthroughs (NJDOL)</td></tr>
+    </tbody>
+</table>
+
+<h2>Responsive and usability notes</h2>
+<ul>
+    <li><strong>Mobile-first:</strong> layouts reflow at 320px wide and at 200% zoom without horizontal scrolling; the NJDOL weekly certification rebuild is the production example.</li>
+    <li><strong>Cross-browser:</strong> Centene regression passes covered Chrome, Edge, Firefox, and Safari, on desktop and mobile.</li>
+    <li><strong>Design-system transition:</strong> Bootstrap and Material today, enterprise design system as it rolls out — tokens can theme Bootstrap/Material components during the transition, and new pages use token components directly, rather than a big-bang rewrite.</li>
+    <li><strong>What is not claimed:</strong> no accessibility certification, no HCI degree, no Figma files from client work, and no outcome metrics the resume does not give. The evidence is the work and the code.</li>
+</ul>
+<script>
+(function () {
+    'use strict';
+    var step = 1, names = { 1: 'Your details', 2: 'Contact and county', 3: 'Review and confirm' };
+    function showStep() {
+        [1, 2, 3].forEach(function (n) { document.getElementById('ux-step-' + n).hidden = (n !== step); });
+        document.getElementById('ux-step-label').textContent = step + ' of 3';
+        document.getElementById('ux-step-name').textContent = names[step];
+        document.getElementById('ux-back').disabled = (step === 1);
+        document.getElementById('ux-next').textContent = (step === 3) ? 'Submit sample' : 'Next step';
+    }
+    function errorsFor() {
+        var errs = [];
+        if (step === 1) {
+            if (!document.getElementById('UxFirstName').value.trim()) errs.push(['UxFirstName', 'Enter your first name.']);
+            if (!document.getElementById('UxLastName').value.trim()) errs.push(['UxLastName', 'Enter your last name.']);
+        }
+        if (step === 2) {
+            var e = document.getElementById('UxEmail');
+            if (!e.value.trim()) errs.push(['UxEmail', 'Enter your email address.']);
+            else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) errs.push(['UxEmail', 'Enter an email address in the correct format, like name@example.com.']);
+            if (!document.getElementById('UxCounty').value.trim()) errs.push(['UxCounty', 'Enter a county.']);
+        }
+        if (step === 3 && !document.getElementById('UxTerms').checked) errs.push(['UxTerms', 'Confirm you understand this is a fictional sample application.']);
+        return errs;
+    }
+    document.getElementById('ux-next').addEventListener('click', function () {
+        var errs = errorsFor(), summary = document.getElementById('ux-error-summary'), list = document.getElementById('ux-error-list');
+        if (errs.length) {
+            list.innerHTML = '';
+            errs.forEach(function (er) { var li = document.createElement('li'); var a = document.createElement('a'); a.href = '#' + er[0]; a.textContent = er[1]; li.appendChild(a); list.appendChild(li); });
+            summary.hidden = false; document.getElementById('ux-form-status').textContent = 'Please fix the errors before continuing.';
+            return;
+        }
+        summary.hidden = true;
+        if (step < 3) { step++; showStep(); }
+        else { var c = document.getElementById('ux-confirmation'); document.getElementById('ux-confirmation-text').textContent = 'Sample multi-step form complete. In the full app, this would create a reference number and a confirmation page.'; c.hidden = false; document.getElementById('ux-form-status').textContent = 'Sample multi-step form complete.'; }
+    });
+    document.getElementById('ux-back').addEventListener('click', function () { if (step > 1) { step--; showStep(); } });
+    document.getElementById('ux-save').addEventListener('click', function () { document.getElementById('ux-form-status').textContent = 'Draft saved on this page only (fictional demo). In the Frontiers pattern, save-and-resume keeps the in-progress submission so it can be finished later.'; });
+    showStep();
+})();
+</script>
