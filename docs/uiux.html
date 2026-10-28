@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front-end and UI/UX work — Iowa Public Services Portal demo</title>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="container site-header__inner">
+<a class="site-header__brand" href="index.html">Iowa Public Services Portal</a>
+<nav class="site-nav" aria-label="Main"><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="uiux.html">Front-end / UI/UX</a></li>
+<li><a href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio">Full code</a></li>
+</ul></nav>
+</div></header>
+<div class="disclaimer-banner"><div class="container">Fictional demo only — not a State of Iowa system. Full case studies are in the repo at <code>docs/frontend-uiux-case-studies.md</code>.</div></div>
+<main id="main" class="container">
+<h1>Front-end and UI/UX work — shown, not just described</h1>
+<p class="lead">The DOM DoIT job description asks for a portfolio that shows UI work, not only backend code. This page is that evidence, from the author's Iowa-tailored resume. No Figma files are published — that Figma work came from client UX teams — but the translation of a design specification into a working, accessible interface is shown here.</p>
+<h2>Case studies</h2>
+<div class="card-grid">
+<div class="card"><h3>Centene — Member Self-Service Portal Modernization</h3><p>Figma → responsive semantic HTML5/Sass/JavaScript. Enterprise design system + Storybook, Bootstrap screens migrated to design-system components, axe-core in Azure DevOps. Fixes in claims filters, date pickers, modal dialogs, and multi-step forms, checked with JAWS, NVDA, and axe.</p></div>
+<div class="card"><h3>Frontiers — Author and Reviewer Submission Platform</h3><p>Shared component library with documented states, accessibility notes, and do/don't guidance. Multi-step submission with progress steps, inline validation, and save-and-resume. WCAG fixes via axe/WAVE, checked with NVDA/JAWS.</p></div>
+<div class="card"><h3>New Jersey DOL — Unemployment Insurance Claimant Services</h3><p>Mobile-friendly weekly certification, layout tables replaced with semantic markup, plain-language questions and errors, shared UI controls to state standards. Tested with JAWS, keyboard-only navigation, and axe before each release.</p></div>
+</div>
+<h2>Interactive demo — multi-step form</h2>
+<p id="ux-form-status" role="status"></p>
+<div id="ux-error-summary" class="error-summary" hidden><h2>There is a problem</h2><ul id="ux-error-list"></ul></div>
+<p><strong>Step <span id="ux-step-label">1 of 3</span>:</strong> <span id="ux-step-name">Your details</span></p>
+<form id="ux-form" novalidate>
+<div id="ux-step-1"><div class="form-group"><label class="form-label" for="UxFirstName">First name</label><input class="form-control" id="UxFirstName" autocomplete="given-name"></div><div class="form-group"><label class="form-label" for="UxLastName">Last name</label><input class="form-control" id="UxLastName" autocomplete="family-name"></div></div>
+<div id="ux-step-2" hidden><div class="form-group"><label class="form-label" for="UxEmail">Email address</label><span class="form-hint" id="ux-email-hint">For example, jordan@example.com</span><input class="form-control" id="UxEmail" type="email" aria-describedby="ux-email-hint" autocomplete="email"></div><div class="form-group"><label class="form-label" for="UxCounty">County</label><input class="form-control" id="UxCounty" value="Polk"></div></div>
+<div id="ux-step-3" hidden><div class="form-group"><input type="checkbox" id="UxTerms"> <label for="UxTerms">I understand this is a fictional sample application.</label></div><p>Review: use Back to check your details before submitting. In a real form, this step would show a read-only summary.</p></div>
+<p><button class="btn btn--secondary" type="button" id="ux-back" disabled>Back</button> <button class="btn" type="button" id="ux-next">Next step</button> <button class="btn" type="button" id="ux-save">Save draft</button></p>
+</form>
+<div id="ux-confirmation" class="alert alert--success" hidden><h2>Sample step complete</h2><p>Sample multi-step form complete. In the full app, this would create a reference number and a confirmation page.</p></div>
+<h2>Before / after — accessibility remediation</h2>
+<table class="data-table"><caption>Before and after accessibility fixes</caption>
+<thead><tr><th scope="col">Before</th><th scope="col">After</th><th scope="col">Checked with</th></tr></thead>
+<tbody>
+<tr><td>Layout tables for page layout</td><td>Semantic markup, landmarks, heading order</td><td>JAWS, keyboard-only, axe</td></tr>
+<tr><td>Unlabelled controls, missing instructions</td><td>Visible labels, hints, error summaries linked to fields</td><td>JAWS, NVDA, axe</td></tr>
+<tr><td>Keyboard traps, lost focus on dialog close</td><td>Focus trap with Escape and focus return</td><td>Keyboard-only, JAWS, NVDA</td></tr>
+<tr><td>Low-contrast text, colour-only status</td><td>Dark text, status in text + heading</td><td>axe, WAVE (Frontiers)</td></tr>
+<tr><td>Technical error messages</td><td>Plain-language questions and errors</td><td>UAT walkthroughs (NJDOL)</td></tr>
+</tbody></table>
+<p><a class="btn" href="index.html">Back to the portal demo</a> <a class="btn btn--secondary" href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio/blob/main/docs/frontend-uiux-case-studies.md">Read the full case studies on GitHub</a></p>
+</main>
+<footer class="site-footer"><div class="container"><p>Fictional portfolio demo by Padmakshi Bhonagiri. Full code: <a href="https://github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio">github.com/PadhuPadmakshi/padmakshi-bhonagiri-portfolio</a></p></div></footer>
+<script>
+(function () {
+  'use strict';
+  var step = 1, names = { 1: 'Your details', 2: 'Contact and county', 3: 'Review and confirm' };
+  function showStep() { [1,2,3].forEach(function (n) { document.getElementById('ux-step-' + n).hidden = (n !== step); }); document.getElementById('ux-step-label').textContent = step + ' of 3'; document.getElementById('ux-step-name').textContent = names[step]; document.getElementById('ux-back').disabled = (step === 1); document.getElementById('ux-next').textContent = (step === 3) ? 'Submit sample' : 'Next step'; }
+  function errorsFor() { var errs = []; if (step === 1) { if (!document.getElementById('UxFirstName').value.trim()) errs.push(['UxFirstName','Enter your first name.']); if (!document.getElementById('UxLastName').value.trim()) errs.push(['UxLastName','Enter your last name.']); } if (step === 2) { var e = document.getElementById('UxEmail'); if (!e.value.trim()) errs.push(['UxEmail','Enter your email address.']); else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) errs.push(['UxEmail','Enter an email address in the correct format, like name@example.com.']); if (!document.getElementById('UxCounty').value.trim()) errs.push(['UxCounty','Enter a county.']); } if (step === 3 && !document.getElementById('UxTerms').checked) errs.push(['UxTerms','Confirm you understand this is a fictional sample application.']); return errs; }
+  document.getElementById('ux-next').addEventListener('click', function () { var errs = errorsFor(), summary = document.getElementById('ux-error-summary'), list = document.getElementById('ux-error-list'); if (errs.length) { list.innerHTML = ''; errs.forEach(function (er) { var li = document.createElement('li'); var a = document.createElement('a'); a.href = '#' + er[0]; a.textContent = er[1]; li.appendChild(a); list.appendChild(li); }); summary.hidden = false; document.getElementById('ux-form-status').textContent = 'Please fix the errors before continuing.'; return; } summary.hidden = true; if (step < 3) { step++; showStep(); } else { document.getElementById('ux-confirmation').hidden = false; document.getElementById('ux-form-status').textContent = 'Sample multi-step form complete.'; } });
+  document.getElementById('ux-back').addEventListener('click', function () { if (step > 1) { step--; showStep(); } });
+  document.getElementById('ux-save').addEventListener('click', function () { document.getElementById('ux-form-status').textContent = 'Draft saved on this page only (fictional demo). In the Frontiers pattern, save-and-resume keeps the in-progress submission so it can be finished later.'; });
+  showStep();
+})();
+</script>
+</body>
+</html>
